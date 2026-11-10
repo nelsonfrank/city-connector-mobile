@@ -1,0 +1,31 @@
+{
+  "cli": {
+    "version": ">= 14.0.0",
+    "appVersionSource": "remote"
+  },
+  "build": {
+    "development": {
+      "developmentClient": true,
+      "distribution": "internal",
+      "node": "22.14.0",
+      "pnpm": "10.33.4",
+      "channel": "development"
+    },
+    "preview": {
+      "distribution": "internal",
+      "node": "22.14.0",
+      "pnpm": "10.33.4",
+      "channel": "preview"
+    },
+    "production": {
+      "distribution": "store",
+      "node": "22.14.0",
+      "pnpm": "10.33.4",
+      "channel": "production",
+      "autoIncrement": true
+    }
+  },
+  "submit": {
+    "production": {}
+  }
+}

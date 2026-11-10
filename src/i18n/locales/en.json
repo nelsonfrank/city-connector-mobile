@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appName": "City Connector",
+    "loading": "Loading...",
+    "retry": "Try again",
+    "cancel": "Cancel",
+    "search": "Search",
+    "scheduled": "Scheduled",
+    "live": "Live",
+    "onTime": "On time",
+    "delayed": "+{{minutes}} min",
+    "early": "{{minutes}} min",
+    "walk": "Walk",
+    "bus": "Bus",
+    "train": "Train",
+    "offlineNotice": "You are currently offline. Showing cached transit data.",
+    "errorGeneric": "Something went wrong. Please try again.",
+    "errorNetwork": "Network request failed. Check your connection.",
+    "errorRateLimit": "Too many requests. Please wait {{seconds}}s before trying again.",
+    "errorTimeout": "The request took too long. Please try again."
+  },
+  "tabs": {
+    "nearby": "Nearby",
+    "plan": "Plan",
+    "search": "Search",
+    "settings": "Settings"
+  },
+  "nearby": {
+    "title": "Nearby Stops",
+    "subtitle": "Discover stops and departures around you",
+    "requestLocation": "Enable Location",
+    "locationRationale": "City Connector needs foreground location to discover transit stops around you.",
+    "locationDenied": "Location permission denied. You can still pick a location on the map.",
+    "pickOnMap": "Pick location on map",
+    "stopsFound_one": "{{count}} stop nearby",
+    "stopsFound_other": "{{count}} stops nearby",
+    "noStopsNearby": "No transit stops found nearby. Move the map to explore other areas.",
+    "departures": "Upcoming Departures",
+    "noDepartures": "No scheduled departures found for this stop.",
+    "agencyDegraded": "Feed for agency {{agency}} is currently degraded. Showing scheduled times."
+  },
+  "journey": {
+    "title": "Plan Journey",
+    "fromPlaceholder": "Origin (current location or stop)",
+    "toPlaceholder": "Destination stop or landmark",
+    "currentLocation": "Current location",
+    "searchButton": "Find Itineraries",
+    "paretoFastest": "Fastest",
+    "paretoTransfers": "Fewest Transfers",
+    "paretoWalking": "Least Walking",
+    "duration": "Duration: {{duration}}",
+    "transfers": "Transfers: {{count}}",
+    "walkDistance": "Walk: {{distance}}",
+    "noJourneys": "No itineraries found between these locations.",
+    "legTimeline": "Journey Itinerary",
+    "transferAt": "Transfer to {{agency}} route {{route}} at {{stop}}"
+  },
+  "search": {
+    "title": "Search Transit",
+    "placeholder": "Search stops, routes, landmarks...",
+    "recentSearches": "Recent Searches",
+    "clearRecents": "Clear recents",
+    "stopsGroup": "Stops",
+    "routesGroup": "Routes",
+    "noResults": "No matching stops or routes found."
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "theme": "Appearance",
+    "themeSystem": "System default",
+    "themeLight": "Light",
+    "themeDark": "Dark",
+    "refreshInterval": "Realtime Refresh Rate",
+    "clearCache": "Clear Offline Cache",
+    "cacheCleared": "Offline cache cleared successfully.",
+    "version": "App Version: {{version}}"
+  }
+}

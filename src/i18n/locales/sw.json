@@ -1,0 +1,79 @@
+{
+  "common": {
+    "appName": "City Connector",
+    "loading": "Inapakia...",
+    "retry": "Jaribu tena",
+    "cancel": "Ghairi",
+    "search": "Tafuta",
+    "scheduled": "Iliyoratibiwa",
+    "live": "Moja kwa moja",
+    "onTime": "Kwa wakati",
+    "delayed": "+Dakika {{minutes}}",
+    "early": "Dakika {{minutes}} mapema",
+    "walk": "Tembea",
+    "bus": "Basi",
+    "train": "Treni",
+    "offlineNotice": "Huna mtandao kwa sasa. Inaonyesha data ya usafiri iliyohifadhiwa.",
+    "errorGeneric": "Hitilafu imetokea. Tafadhali jaribu tena.",
+    "errorNetwork": "Muunganisho wa mtandao umeshindikana. Angalia mtandao wako.",
+    "errorRateLimit": "Maombi mengi mno. Tafadhali subiri sekunde {{seconds}} kabla ya kujaribu tena.",
+    "errorTimeout": "Ombi limechukua muda mrefu mno. Tafadhali jaribu tena."
+  },
+  "tabs": {
+    "nearby": "Karibu",
+    "plan": "Panga Safari",
+    "search": "Tafuta",
+    "settings": "Mipangilio"
+  },
+  "nearby": {
+    "title": "Vituo Vya Karibu",
+    "subtitle": "Gundua vituo na safari zinazoondoka karibu nawe",
+    "requestLocation": "Wezesha Eneo",
+    "locationRationale": "City Connector inahitaji eneo lako ili kutambua vituo vya usafiri vilivyo karibu.",
+    "locationDenied": "Ruhusa ya eneo imekataliwa. Bado unaweza kuchagua eneo kwenye ramani.",
+    "pickOnMap": "Chagua eneo kwenye ramani",
+    "stopsFound_one": "Kituo {{count}} cha karibu",
+    "stopsFound_other": "Vituo {{count}} vya karibu",
+    "noStopsNearby": "Hakuna vituo vya usafiri vilivyopatikana karibu. Sogeza ramani kutazama maeneo mengine.",
+    "departures": "Safari Zinazofuata",
+    "noDepartures": "Hakuna safari zilizoratibiwa kwa kituo hiki.",
+    "agencyDegraded": "Huduma ya shirika {{agency}} ina changamoto kwa sasa. Inaonyesha nyakati zilizoratibiwa."
+  },
+  "journey": {
+    "title": "Panga Safari",
+    "fromPlaceholder": "Unapotoka (eneo la sasa au kituo)",
+    "toPlaceholder": "Unapokwenda (kituo au eneo)",
+    "currentLocation": "Eneo langu la sasa",
+    "searchButton": "Tafuta Njia",
+    "paretoFastest": "Ya Kasi Zaidi",
+    "paretoTransfers": "Mabadiliko Machache",
+    "paretoWalking": "Kutembea Kidogo",
+    "duration": "Muda: {{duration}}",
+    "transfers": "Mabadiliko: {{count}}",
+    "walkDistance": "Kutembea: {{distance}}",
+    "noJourneys": "Hakuna njia zilizopatikana kati ya maeneo haya.",
+    "legTimeline": "Ratiba ya Safari",
+    "transferAt": "Badilisha hadi shirika la {{agency}} njia {{route}} katika kituo cha {{stop}}"
+  },
+  "search": {
+    "title": "Tafuta Usafiri",
+    "placeholder": "Tafuta vituo, njia, au maeneo...",
+    "recentSearches": "Utafutaji wa Hivi Karibuni",
+    "clearRecents": "Futa yaliyotafutwa",
+    "stopsGroup": "Vituo",
+    "routesGroup": "Njia",
+    "noResults": "Hakuna vituo au njia zilizolingana."
+  },
+  "settings": {
+    "title": "Mipangilio",
+    "language": "Lugha",
+    "theme": "Mwonekano",
+    "themeSystem": "Mfumo chaguomsingi",
+    "themeLight": "Mwangaza",
+    "themeDark": "Giza",
+    "refreshInterval": "Kasi ya Kusasisha Data",
+    "clearCache": "Futa Data Iliyohifadhiwa",
+    "cacheCleared": "Data iliyohifadhiwa imefutwa kikamilifu.",
+    "version": "Toleo la Programu: {{version}}"
+  }
+}

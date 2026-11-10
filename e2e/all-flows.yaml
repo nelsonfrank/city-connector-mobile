@@ -1,0 +1,5 @@
+appId: com.cityconnector.app
+---
+- runFlow: nearby-flow.yaml
+- runFlow: plan-journey-flow.yaml
+- runFlow: search-flow.yaml
