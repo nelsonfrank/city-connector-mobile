@@ -76,8 +76,7 @@ const JourneyOptionCardComponent: React.FC<JourneyOptionCardProps> = ({
               style={[
                 styles.transitPill,
                 {
-                  backgroundColor:
-                    leg.mode === 'TRAIN' ? '#0F766E' : theme.colors.primary,
+                  backgroundColor: leg.mode === 'TRAIN' ? '#0F766E' : theme.colors.primary,
                 },
               ]}
             >

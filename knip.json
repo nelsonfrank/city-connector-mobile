@@ -1,26 +1,25 @@
 {
   "$schema": "https://unpkg.com/knip@5/overview/config.schema.json",
   "entry": [
-    "app/**/*.tsx",
-    "app/**/*.ts",
-    "app.config.ts",
-    "metro.config.js",
-    "babel.config.js",
-    "jest.config.js"
+    "app/**/*.{ts,tsx}",
+    "src/api/index.ts",
+    "src/components/index.ts",
+    "src/test/**/*.{ts,tsx}"
   ],
-  "project": [
-    "src/**/*.{ts,tsx}",
-    "app/**/*.{ts,tsx}"
-  ],
+  "project": ["src/**/*.{ts,tsx}", "app/**/*.{ts,tsx}"],
   "ignoreDependencies": [
-    "expo-symbols",
-    "expo-constants",
-    "expo-font",
-    "expo-splash-screen",
-    "expo-status-bar",
+    "@gorhom/bottom-sheet",
+    "@shopify/flash-list",
+    "react-native-unistyles",
+    "lefthook",
+    "expo-updates",
+    "expo-glass-effect",
     "expo-web-browser",
-    "react-native-web",
-    "react-native-worklets",
-    "react-dom"
-  ]
+    "babel-jest"
+  ],
+  "ignoreBinaries": ["maestro"],
+  "rules": {
+    "exports": "off",
+    "types": "off"
+  }
 }

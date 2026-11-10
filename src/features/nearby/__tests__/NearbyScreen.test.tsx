@@ -1,5 +1,5 @@
 import React from 'react';
-import { render, screen, waitFor } from '@testing-library/react-native';
+import { render, screen, waitFor, within } from '@testing-library/react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { NearbyScreen } from '../NearbyScreen';
 import { server } from '@/test/server';
@@ -9,20 +9,18 @@ beforeAll(() => server.listen({ onUnhandledRequest: 'bypass' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
-function renderWithProviders(ui: React.ReactElement) {
+async function renderWithProviders(ui: React.ReactElement) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: { retry: false },
     },
   });
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
-  );
+  return await render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 }
 
 describe('NearbyScreen Integration', () => {
   it('renders nearby stops from MSW mock fixtures', async () => {
-    renderWithProviders(<NearbyScreen />);
+    await renderWithProviders(<NearbyScreen />);
 
     // Wait for stops to load from MSW
     await waitFor(() => {
@@ -32,12 +30,13 @@ describe('NearbyScreen Integration', () => {
   });
 
   it('renders degraded agency feed banner without failing the screen', async () => {
-    renderWithProviders(<NearbyScreen />);
+    await renderWithProviders(<NearbyScreen />);
 
     // MATATU agency is configured as stale/degraded in mockRealtimeSnapshot
     await waitFor(() => {
-      expect(screen.getByRole('alert')).toBeTruthy();
-      expect(screen.getByText(/MATATU/i)).toBeTruthy();
+      const banner = screen.getByTestId('feed-status-banner');
+      expect(banner).toBeTruthy();
+      expect(within(banner).getByText(/MATATU/i)).toBeTruthy();
     });
   });
 });

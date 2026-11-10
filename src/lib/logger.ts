@@ -10,6 +10,12 @@ function sanitizeData(data: unknown): unknown {
   if (!data || typeof data !== 'object') {
     return data;
   }
+  if (data instanceof Error) {
+    return {
+      name: data.name,
+      message: data.message,
+    };
+  }
   if (Array.isArray(data)) {
     return data.map(sanitizeData);
   }

@@ -93,8 +93,44 @@ export function useLocation(): UseLocationResult {
   }, []);
 
   useEffect(() => {
-    checkPermissionAndFetchLocation();
-  }, [checkPermissionAndFetchLocation]);
+    let isCancelled = false;
+
+    void (async () => {
+      try {
+        const { status } = await Location.getForegroundPermissionsAsync();
+        if (isCancelled) return;
+        if (status === 'granted') {
+          setPermissionStatus('granted');
+          const pos = await Location.getCurrentPositionAsync({
+            accuracy: Location.Accuracy.Balanced,
+          });
+          if (isCancelled) return;
+          setLocation({
+            latitude: pos.coords.latitude,
+            longitude: pos.coords.longitude,
+          });
+        } else if (status === 'denied') {
+          setPermissionStatus('denied');
+          setLocation(DEFAULT_FALLBACK_COORDINATES);
+        } else {
+          setPermissionStatus('undetermined');
+        }
+      } catch (err) {
+        if (isCancelled) return;
+        logger.warn('Failed to obtain device location:', err);
+        setError('Unable to fetch current location');
+        setLocation(DEFAULT_FALLBACK_COORDINATES);
+      } finally {
+        if (!isCancelled) {
+          setIsLoading(false);
+        }
+      }
+    })();
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   return {
     location,

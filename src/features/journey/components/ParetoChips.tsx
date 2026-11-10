@@ -18,17 +18,34 @@ export const ParetoChips: React.FC<ParetoChipsProps> = ({ selected, onSelect }) 
     {
       id: 'fastest',
       label: t('journey.paretoFastest'),
-      icon: <Zap size={14} color={selected === 'fastest' ? theme.colors.primaryContent : theme.colors.textSecondary} />,
+      icon: (
+        <Zap
+          size={14}
+          color={selected === 'fastest' ? theme.colors.primaryContent : theme.colors.textSecondary}
+        />
+      ),
     },
     {
       id: 'transfers',
       label: t('journey.paretoTransfers'),
-      icon: <GitCommit size={14} color={selected === 'transfers' ? theme.colors.primaryContent : theme.colors.textSecondary} />,
+      icon: (
+        <GitCommit
+          size={14}
+          color={
+            selected === 'transfers' ? theme.colors.primaryContent : theme.colors.textSecondary
+          }
+        />
+      ),
     },
     {
       id: 'walking',
       label: t('journey.paretoWalking'),
-      icon: <Footprints size={14} color={selected === 'walking' ? theme.colors.primaryContent : theme.colors.textSecondary} />,
+      icon: (
+        <Footprints
+          size={14}
+          color={selected === 'walking' ? theme.colors.primaryContent : theme.colors.textSecondary}
+        />
+      ),
     },
   ];
 

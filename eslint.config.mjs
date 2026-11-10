@@ -1,4 +1,4 @@
-import expoConfig from 'eslint-config-expo/flat';
+import expoConfig from 'eslint-config-expo/flat.js';
 import i18nextPlugin from 'eslint-plugin-i18next';
 
 export default [
@@ -26,6 +26,8 @@ export default [
       'android/**',
       'coverage/**',
       '*.config.js',
+      'src/test/mocks/**',
+      'jest.setup.ts',
     ],
   },
 ];

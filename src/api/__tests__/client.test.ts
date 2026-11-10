@@ -23,9 +23,9 @@ describe('API Client (Ky + Zod + Rate Limiting)', () => {
   it('surfaces RateLimitError with retryAfterSeconds on HTTP 429 response', async () => {
     setSimulateRateLimit(true);
 
-    await expect(
-      apiRequest('journey', z.any(), { endpointName: 'GET /journey' }),
-    ).rejects.toThrow(RateLimitError);
+    await expect(apiRequest('journey', z.any(), { endpointName: 'GET /journey' })).rejects.toThrow(
+      RateLimitError,
+    );
   });
 
   it('rejects with RateLimitError when client token bucket is exhausted', async () => {

@@ -51,16 +51,13 @@ export const handlers = [
   // GET /journey
   http.get(`${baseUrl}/journey`, () => {
     if (simulateRateLimit) {
-      return new HttpResponse(
-        JSON.stringify({ error: 'Rate limit exceeded on /journey' }),
-        {
-          status: 429,
-          headers: {
-            'Retry-After': '30',
-            'Content-Type': 'application/json',
-          },
+      return new HttpResponse(JSON.stringify({ error: 'Rate limit exceeded on /journey' }), {
+        status: 429,
+        headers: {
+          'Retry-After': '30',
+          'Content-Type': 'application/json',
         },
-      );
+      });
     }
     return HttpResponse.json(mockJourneyResponse);
   }),
@@ -73,9 +70,7 @@ export const handlers = [
       s.name.toLowerCase().includes(query),
     );
     const filteredRoutes = mockSearchResponse.routes.filter(
-      (r) =>
-        r.shortName.toLowerCase().includes(query) ||
-        r.longName.toLowerCase().includes(query),
+      (r) => r.shortName.toLowerCase().includes(query) || r.longName.toLowerCase().includes(query),
     );
 
     return HttpResponse.json({

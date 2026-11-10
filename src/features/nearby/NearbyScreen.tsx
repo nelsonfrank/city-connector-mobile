@@ -1,11 +1,5 @@
 import React, { useCallback, useMemo, useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -17,7 +11,7 @@ import { OfflineBanner } from '@/components/OfflineBanner';
 import { TransitMap, type MarkerItem } from '@/components/TransitMap';
 import { useRealtimeSnapshot } from '@/features/realtime/useRealtimeSnapshot';
 import { useDebounce } from '@/hooks/useDebounce';
-import { useLocation } from '@/hooks/useLocation';
+import { DEFAULT_FALLBACK_COORDINATES, useLocation } from '@/hooks/useLocation';
 import { hasSignificantMovement, type Coordinates } from '@/lib/geo';
 import { useAppTheme } from '@/theme';
 import { StopListItem } from './components/StopListItem';
@@ -35,7 +29,10 @@ export const NearbyScreen: React.FC = () => {
   } = useLocation();
 
   const [mapCenter, setMapCenter] = useState<Coordinates | null>(null);
-  const activeCenter = mapCenter ?? location ?? { latitude: -1.286389, longitude: 36.817223 };
+  const activeCenter = useMemo(
+    () => mapCenter ?? location ?? DEFAULT_FALLBACK_COORDINATES,
+    [mapCenter, location],
+  );
 
   // Debounce map camera movement by 500ms
   const debouncedCenter = useDebounce(activeCenter, 500);
@@ -44,10 +41,7 @@ export const NearbyScreen: React.FC = () => {
   const { activeVehicles, degradedAgencies } = useRealtimeSnapshot(true);
 
   // Query nearby stops debounced
-  const {
-    data: stops,
-    isLoading: isStopsLoading,
-  } = useQuery({
+  const { data: stops, isLoading: isStopsLoading } = useQuery({
     queryKey: stopsQueryKeys.nearby(debouncedCenter.latitude, debouncedCenter.longitude),
     queryFn: ({ signal }) =>
       fetchNearbyStops(debouncedCenter.latitude, debouncedCenter.longitude, 800, signal),
@@ -123,7 +117,10 @@ export const NearbyScreen: React.FC = () => {
         <View
           style={[
             styles.deniedBanner,
-            { backgroundColor: theme.colors.surfaceSecondary, borderColor: theme.colors.surfaceBorder },
+            {
+              backgroundColor: theme.colors.surfaceSecondary,
+              borderColor: theme.colors.surfaceBorder,
+            },
           ]}
         >
           <Text style={[styles.deniedText, { color: theme.colors.textSecondary }]}>

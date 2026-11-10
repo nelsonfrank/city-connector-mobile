@@ -29,19 +29,15 @@ export async function fetchJourney(
   params: JourneySearchParams,
   signal?: AbortSignal,
 ): Promise<JourneyResponse> {
-  return apiRequest(
-    'journey',
-    JourneyResponseSchema,
-    {
-      endpointName: 'GET /journey',
-      rateLimitCategory: 'journey',
-      searchParams: {
-        from: `${params.fromLat},${params.fromLng}`,
-        to: `${params.toLat},${params.toLng}`,
-        time: params.time ?? new Date().toISOString(),
-        arriveBy: params.arriveBy ?? false,
-      },
-      signal,
+  return apiRequest('journey', JourneyResponseSchema, {
+    endpointName: 'GET /journey',
+    rateLimitCategory: 'journey',
+    searchParams: {
+      from: `${params.fromLat},${params.fromLng}`,
+      to: `${params.toLat},${params.toLng}`,
+      time: params.time ?? new Date().toISOString(),
+      arriveBy: params.arriveBy ?? false,
     },
-  );
+    signal,
+  });
 }

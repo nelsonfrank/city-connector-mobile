@@ -2,10 +2,10 @@ appId: com.cityconnector.app
 ---
 # Flow 3: Stop & Route text search with recents
 - launchApp
-- tapOn: "Search"
-- assertVisible: "Recent Searches"
+- tapOn: 'Search'
+- assertVisible: 'Recent Searches'
 - tapOn:
-    id: "search-text-input"
-- inputText: "Kikuyu"
-- assertVisible: "Routes"
-- assertVisible: "105"
+    id: 'search-text-input'
+- inputText: 'Kikuyu'
+- assertVisible: 'Routes'
+- assertVisible: '105'

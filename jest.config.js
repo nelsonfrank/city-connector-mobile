@@ -1,17 +1,20 @@
 /** @type {import('jest').Config} */
 module.exports = {
   preset: 'jest-expo',
+  resolver: 'react-native-worklets/jest/resolver.js',
   setupFilesAfterEnv: ['<rootDir>/jest.setup.ts'],
   transformIgnorePatterns: [
-    'node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@sentry/react-native|native-base|react-native-svg|@maplibre/maplibre-react-native|@gorhom/bottom-sheet|@shopify/flash-list|react-native-reanimated|react-native-gesture-handler|react-native-screens|react-native-safe-area-context|react-native-unistyles|react-native-nitro-modules|ky)',
+    'node_modules/(?!.*(@react-native|react-native|expo|@expo|@maplibre|@gorhom|@shopify|@tanstack|react-navigation|@react-navigation|ky|msw|@mswjs|rettime|headers-polyfill|@open-draft|outvariant|strict-event-emitter|until-async))',
   ],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
+    '^rettime$': '<rootDir>/src/test/mocks/rettime.cjs',
   },
+  transform: {
+    '^.+\\.[jt]sx?$': 'babel-jest',
+    '^.+\\.m?js$': 'babel-jest',
+  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json', 'node', 'mjs'],
   testPathIgnorePatterns: ['/node_modules/', '/e2e/'],
-  collectCoverageFrom: [
-    'src/**/*.{ts,tsx}',
-    '!src/**/*.d.ts',
-    '!src/test/**',
-  ],
+  collectCoverageFrom: ['src/**/*.{ts,tsx}', '!src/**/*.d.ts', '!src/test/**'],
 };

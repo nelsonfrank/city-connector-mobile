@@ -21,6 +21,8 @@ export const FeedStatusBanner: React.FC<FeedStatusBannerProps> = ({ degradedAgen
 
   return (
     <View
+      testID="feed-status-banner"
+      accessible={true}
       style={[
         styles.banner,
         {
@@ -29,6 +31,7 @@ export const FeedStatusBanner: React.FC<FeedStatusBannerProps> = ({ degradedAgen
         },
       ]}
       accessibilityRole="alert"
+      role="alert"
     >
       <AlertCircle size={16} color={theme.colors.warning} />
       <Text style={[styles.text, { color: theme.colors.textPrimary }]}>

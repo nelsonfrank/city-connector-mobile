@@ -72,6 +72,9 @@
     "themeLight": "Mwangaza",
     "themeDark": "Giza",
     "refreshInterval": "Kasi ya Kusasisha Data",
+    "languageEn": "English",
+    "languageSw": "Kiswahili",
+    "secondsUnit": "{{seconds}}s",
     "clearCache": "Futa Data Iliyohifadhiwa",
     "cacheCleared": "Data iliyohifadhiwa imefutwa kikamilifu.",
     "version": "Toleo la Programu: {{version}}"

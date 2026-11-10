@@ -6,20 +6,13 @@ export const searchQueryKeys = {
   query: (q: string) => ['search', q.trim().toLowerCase()] as const,
 };
 
-export async function searchTransit(
-  query: string,
-  signal?: AbortSignal,
-): Promise<SearchResponse> {
-  return apiRequest(
-    'search',
-    SearchResponseSchema,
-    {
-      endpointName: 'GET /search',
-      rateLimitCategory: 'search',
-      searchParams: {
-        q: query.trim(),
-      },
-      signal,
+export async function searchTransit(query: string, signal?: AbortSignal): Promise<SearchResponse> {
+  return apiRequest('search', SearchResponseSchema, {
+    endpointName: 'GET /search',
+    rateLimitCategory: 'search',
+    searchParams: {
+      q: query.trim(),
     },
-  );
+    signal,
+  });
 }

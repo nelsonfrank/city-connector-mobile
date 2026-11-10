@@ -1,12 +1,6 @@
 import React, { memo } from 'react';
 import { StyleSheet, View } from 'react-native';
-import {
-  Map,
-  Camera,
-  Marker,
-  GeoJSONSource,
-  Layer,
-} from '@maplibre/maplibre-react-native';
+import { Map, Camera, Marker, GeoJSONSource, Layer } from '@maplibre/maplibre-react-native';
 import { env } from '@/config/env';
 import type { Coordinates } from '@/lib/geo';
 
@@ -60,10 +54,7 @@ const TransitMapComponent: React.FC<TransitMapProps> = ({
         mapStyle={env.EXPO_PUBLIC_MAP_TILE_STYLE_URL}
         onRegionDidChange={(event: any) => {
           if (onRegionChange && event?.nativeEvent) {
-            const center =
-              event.nativeEvent.viewState?.center ??
-              event.nativeEvent.center ??
-              null;
+            const center = event.nativeEvent.viewState?.center ?? event.nativeEvent.center ?? null;
             if (Array.isArray(center) && center.length >= 2) {
               const [lng, lat] = center;
               if (typeof lat === 'number' && typeof lng === 'number') {
@@ -98,13 +89,7 @@ const TransitMapComponent: React.FC<TransitMapProps> = ({
         )}
 
         {cappedMarkers.map((marker) => (
-          <Marker
-            key={marker.id}
-            coordinate={{
-              latitude: marker.latitude,
-              longitude: marker.longitude,
-            }}
-          >
+          <Marker key={marker.id} id={marker.id} lngLat={[marker.longitude, marker.latitude]}>
             <View>
               {marker.renderMarker ? (
                 marker.renderMarker()

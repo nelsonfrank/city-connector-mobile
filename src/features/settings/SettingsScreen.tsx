@@ -1,13 +1,9 @@
 import React, { useState } from 'react';
-import { Alert, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { queryClient } from '@/lib/queryClient';
-import { appStorage, queryCacheStorage } from '@/lib/storage';
-import {
-  useSettingsStore,
-  type AppLanguage,
-  type AppThemeMode,
-} from '@/stores/settingsStore';
+import { queryCacheStorage } from '@/lib/storage';
+import { useSettingsStore, type AppLanguage, type AppThemeMode } from '@/stores/settingsStore';
 import { useAppTheme } from '@/theme';
 
 export const SettingsScreen: React.FC = () => {
@@ -40,7 +36,12 @@ export const SettingsScreen: React.FC = () => {
   return (
     <ScrollView style={[styles.container, { backgroundColor: theme.colors.background }]}>
       {/* Theme Selection */}
-      <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.section,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>
           {t('settings.theme')}
         </Text>
@@ -75,8 +76,8 @@ export const SettingsScreen: React.FC = () => {
                 {mode === 'system'
                   ? t('settings.themeSystem')
                   : mode === 'light'
-                  ? t('settings.themeLight')
-                  : t('settings.themeDark')}
+                    ? t('settings.themeLight')
+                    : t('settings.themeDark')}
               </Text>
             </TouchableOpacity>
           ))}
@@ -84,7 +85,12 @@ export const SettingsScreen: React.FC = () => {
       </View>
 
       {/* Language Selection */}
-      <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.section,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>
           {t('settings.language')}
         </Text>
@@ -107,13 +113,11 @@ export const SettingsScreen: React.FC = () => {
                 styles.optionText,
                 {
                   color:
-                    currentLang === 'en'
-                      ? theme.colors.primaryContent
-                      : theme.colors.textSecondary,
+                    currentLang === 'en' ? theme.colors.primaryContent : theme.colors.textSecondary,
                 },
               ]}
             >
-              English
+              {t('settings.languageEn')}
             </Text>
           </TouchableOpacity>
 
@@ -135,20 +139,23 @@ export const SettingsScreen: React.FC = () => {
                 styles.optionText,
                 {
                   color:
-                    currentLang === 'sw'
-                      ? theme.colors.primaryContent
-                      : theme.colors.textSecondary,
+                    currentLang === 'sw' ? theme.colors.primaryContent : theme.colors.textSecondary,
                 },
               ]}
             >
-              Kiswahili
+              {t('settings.languageSw')}
             </Text>
           </TouchableOpacity>
         </View>
       </View>
 
       {/* Realtime Polling Rate */}
-      <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.section,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <Text style={[styles.sectionTitle, { color: theme.colors.textSecondary }]}>
           {t('settings.refreshInterval')}
         </Text>
@@ -183,7 +190,7 @@ export const SettingsScreen: React.FC = () => {
                   },
                 ]}
               >
-                {interval / 1000}s
+                {t('settings.secondsUnit', { seconds: interval / 1000 })}
               </Text>
             </TouchableOpacity>
           ))}
@@ -191,7 +198,12 @@ export const SettingsScreen: React.FC = () => {
       </View>
 
       {/* Offline Cache Maintenance */}
-      <View style={[styles.section, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.section,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <TouchableOpacity
           style={[styles.actionBtn, { borderColor: theme.colors.error }]}
           onPress={handleClearCache}

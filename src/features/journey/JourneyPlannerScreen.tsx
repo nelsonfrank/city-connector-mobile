@@ -1,12 +1,5 @@
 import React, { useState } from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  TextInput,
-  View,
-} from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, TextInput, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useRouter } from 'expo-router';
 import { useQuery } from '@tanstack/react-query';
@@ -18,10 +11,7 @@ import { OfflineBanner } from '@/components/OfflineBanner';
 import { RateLimitCountdown } from '@/components/RateLimitCountdown';
 import { useLocation } from '@/hooks/useLocation';
 import { useOnline } from '@/hooks/useOnline';
-import {
-  useJourneySelectionStore,
-  type ParetoCriteria,
-} from '@/stores/journeySelectionStore';
+import { useJourneySelectionStore, type ParetoCriteria } from '@/stores/journeySelectionStore';
 import { useAppTheme } from '@/theme';
 import { JourneyOptionCard } from './components/JourneyOptionCard';
 import { ParetoChips } from './components/ParetoChips';
@@ -35,31 +25,39 @@ export const JourneyPlannerScreen: React.FC = () => {
 
   const [fromQuery, setFromQuery] = useState<string>('Nairobi CBD');
   const [toQuery, setToQuery] = useState<string>('Westlands');
-  const [hasSearched, setHasSearched] = useState<boolean>(false);
+  const { selectedCriteria, setSelectedCriteria, setSelectedItineraryId } =
+    useJourneySelectionStore();
+  const [activeSearchParams, setActiveSearchParams] = useState<{
+    fromLat: number;
+    fromLng: number;
+    toLat: number;
+    toLng: number;
+    time: string;
+  } | null>(null);
 
-  const {
-    selectedCriteria,
-    setSelectedCriteria,
-    setSelectedItineraryId,
-  } = useJourneySelectionStore();
+  const hasSearched = activeSearchParams !== null;
 
-  const searchParams = {
-    fromLat: location?.latitude ?? -1.286389,
-    fromLng: location?.longitude ?? 36.817223,
-    toLat: -1.2644,
-    toLng: 36.8044,
-    time: new Date().toISOString(),
-  };
-
-  const { data, isLoading, error, refetch } = useQuery({
-    queryKey: journeyQueryKeys.plan(searchParams),
-    queryFn: ({ signal }) => fetchJourney(searchParams, signal),
-    enabled: hasSearched,
+  const { data, isLoading, error } = useQuery({
+    queryKey: activeSearchParams
+      ? journeyQueryKeys.plan(activeSearchParams)
+      : (['journey', 'idle'] as const),
+    queryFn: ({ signal }) => {
+      if (!activeSearchParams) {
+        throw new Error('No search params');
+      }
+      return fetchJourney(activeSearchParams, signal);
+    },
+    enabled: activeSearchParams !== null,
   });
 
   const handleSearch = () => {
-    setHasSearched(true);
-    refetch();
+    setActiveSearchParams({
+      fromLat: location?.latitude ?? -1.286389,
+      fromLng: location?.longitude ?? 36.817223,
+      toLat: -1.2644,
+      toLng: 36.8044,
+      time: 'now',
+    });
   };
 
   const itineraries = data?.itineraries ?? [];
@@ -136,10 +134,7 @@ export const JourneyPlannerScreen: React.FC = () => {
 
       <View style={styles.resultsContainer}>
         {isRateLimited && (
-          <RateLimitCountdown
-            initialSeconds={retryAfterSeconds}
-            onRetry={handleSearch}
-          />
+          <RateLimitCountdown initialSeconds={retryAfterSeconds} onRetry={handleSearch} />
         )}
 
         {error && !isRateLimited && (

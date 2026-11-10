@@ -1,3 +1,36 @@
+// Polyfill matchMedia and document for Reanimated in Node/Jest
+if (typeof window !== 'undefined') {
+  window.matchMedia =
+    window.matchMedia ||
+    function () {
+      return {
+        matches: false,
+        media: '',
+        onchange: null,
+        addListener: jest.fn(),
+        removeListener: jest.fn(),
+        addEventListener: jest.fn(),
+        removeEventListener: jest.fn(),
+        dispatchEvent: jest.fn(),
+      } as any;
+    };
+}
+
+if (typeof document === 'undefined') {
+  (global as any).document = {
+    getElementById: () => null,
+    createElement: () => ({
+      setAttribute: jest.fn(),
+      sheet: { insertRule: jest.fn() },
+      onload: null,
+    }),
+    head: {
+      appendChild: jest.fn(),
+      removeChild: jest.fn(),
+    },
+  };
+}
+
 // Include Reanimated mock
 require('react-native-reanimated/mock');
 
@@ -126,8 +159,56 @@ jest.mock('@maplibre/maplibre-react-native', () => {
     __esModule: true,
     Map: (props: any) => React.createElement(View, { ...props, testID: 'mock-mapview' }),
     Camera: (props: any) => React.createElement(View, { ...props, testID: 'mock-camera' }),
-    Marker: (props: any) => React.createElement(View, { ...props, testID: 'mock-point-annotation' }),
-    GeoJSONSource: (props: any) => React.createElement(View, { ...props, testID: 'mock-shape-source' }),
+    Marker: (props: any) =>
+      React.createElement(View, { ...props, testID: 'mock-point-annotation' }),
+    GeoJSONSource: (props: any) =>
+      React.createElement(View, { ...props, testID: 'mock-shape-source' }),
     Layer: (props: any) => React.createElement(View, { ...props, testID: 'mock-line-layer' }),
   };
+});
+
+// Mock expo-glass-effect
+jest.mock('expo-glass-effect', () => {
+  const View = require('react-native').View;
+  return {
+    GlassView: View,
+  };
+});
+
+// Mock expo-router
+jest.mock('expo-router', () => ({
+  useRouter: () => ({
+    push: jest.fn(),
+    replace: jest.fn(),
+    back: jest.fn(),
+    setParams: jest.fn(),
+  }),
+  useLocalSearchParams: () => ({}),
+  usePathname: () => '/',
+  Link: require('react-native').Text,
+}));
+
+// Mock lucide-react-native
+jest.mock('lucide-react-native', () => {
+  const React = require('react');
+  const View = require('react-native').View;
+  return new Proxy(
+    {},
+    {
+      get: (_target, prop) => {
+        const IconComponent = (props: any) =>
+          React.createElement(View, { ...props, testID: `icon-${String(prop)}` });
+        IconComponent.displayName = String(prop);
+        return IconComponent;
+      },
+    },
+  );
+});
+
+// Reset client rate limiters between tests
+const { endpointRateLimiters } = require('@/lib/throttle');
+afterEach(() => {
+  endpointRateLimiters.journey.reset();
+  endpointRateLimiters.stops.reset();
+  endpointRateLimiters.search.reset();
 });

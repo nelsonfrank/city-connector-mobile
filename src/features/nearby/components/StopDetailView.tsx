@@ -1,11 +1,5 @@
 import React from 'react';
-import {
-  ActivityIndicator,
-  FlatList,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import { ActivityIndicator, FlatList, StyleSheet, Text, View } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
 import { fetchStopDetail, stopsQueryKeys } from '@/api/endpoints/stops';
@@ -94,7 +88,12 @@ export const StopDetailView: React.FC<StopDetailViewProps> = ({ stopId }) => {
 
   return (
     <View style={[styles.container, { backgroundColor: theme.colors.background }]}>
-      <View style={[styles.header, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.header,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <Text style={[styles.stopName, { color: theme.colors.textPrimary }]}>{stop.name}</Text>
         <View style={styles.subHeader}>
           <View style={[styles.agencyBadge, { backgroundColor: theme.colors.surfaceSecondary }]}>

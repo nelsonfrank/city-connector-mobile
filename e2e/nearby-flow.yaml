@@ -2,11 +2,11 @@ appId: com.cityconnector.app
 ---
 # Flow 1: Nearby stops and departure inspection
 - launchApp
-- assertVisible: "Nearby"
-- tapOn: "Nearby"
+- assertVisible: 'Nearby'
+- tapOn: 'Nearby'
 - assertVisible:
-    id: "transit-map"
-- assertVisible: "Ambassadeur Terminal"
-- tapOn: "Ambassadeur Terminal"
-- assertVisible: "Upcoming Departures"
-- assertVisible: "Kikuyu Town"
+    id: 'transit-map'
+- assertVisible: 'Ambassadeur Terminal'
+- tapOn: 'Ambassadeur Terminal'
+- assertVisible: 'Upcoming Departures'
+- assertVisible: 'Kikuyu Town'

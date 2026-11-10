@@ -16,12 +16,9 @@ export class RateLimitError extends ApiError {
   readonly retryAfterSeconds: number;
 
   constructor(retryAfterSeconds: number = 60, endpoint?: string) {
-    super(
-      `Rate limit exceeded. Try again in ${retryAfterSeconds}s.`,
-      429,
-      endpoint,
-      { retryAfterSeconds },
-    );
+    super(`Rate limit exceeded. Try again in ${retryAfterSeconds}s.`, 429, endpoint, {
+      retryAfterSeconds,
+    });
     this.name = 'RateLimitError';
     this.retryAfterSeconds = retryAfterSeconds;
   }

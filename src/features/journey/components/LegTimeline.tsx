@@ -21,10 +21,7 @@ export const LegTimeline: React.FC<LegTimelineProps> = ({ legs }) => {
       {legs.map((leg, index) => {
         const nextLeg = legs[index + 1];
         const isAgencyTransfer =
-          nextLeg &&
-          nextLeg.agencyId &&
-          leg.agencyId &&
-          nextLeg.agencyId !== leg.agencyId;
+          nextLeg && nextLeg.agencyId && leg.agencyId && nextLeg.agencyId !== leg.agencyId;
 
         const getModeIcon = () => {
           if (leg.mode === 'WALK') {

@@ -1,9 +1,4 @@
-import {
-  formatDelay,
-  formatDurationMinutes,
-  formatTransitTime,
-  isRealtimeStale,
-} from '../time';
+import { formatDelay, formatDurationMinutes, formatTransitTime, isRealtimeStale } from '../time';
 
 describe('Time and Realtime Staleness Utilities', () => {
   describe('formatDelay', () => {

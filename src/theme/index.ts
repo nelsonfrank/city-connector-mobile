@@ -13,8 +13,7 @@ export function useAppTheme(): {
   const themeMode = useSettingsStore((s) => s.theme);
   const systemColorScheme = useColorScheme();
 
-  const isDark =
-    themeMode === 'dark' || (themeMode === 'system' && systemColorScheme === 'dark');
+  const isDark = themeMode === 'dark' || (themeMode === 'system' && systemColorScheme === 'dark');
 
   return {
     theme: isDark ? darkTheme : lightTheme,

@@ -35,8 +35,7 @@ export function useRealtimeSnapshot(isScreenFocused: boolean = true): UseRealtim
   const snapshot = query.data;
 
   // Filter out ghost vehicles (must be younger than staleness threshold)
-  const activeVehicles =
-    snapshot?.vehicles.filter((v) => !isRealtimeStale(v.timestamp)) ?? [];
+  const activeVehicles = snapshot?.vehicles.filter((v) => !isRealtimeStale(v.timestamp)) ?? [];
 
   const agencyStatuses = snapshot?.agencyStatuses ?? [];
   const degradedAgencies = agencyStatuses.filter(

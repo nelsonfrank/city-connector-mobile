@@ -1,5 +1,6 @@
 import React, { Component, type ErrorInfo, type ReactNode } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import i18n from '@/i18n';
 import { reportError } from '@/lib/logger';
 import { Button } from './Button';
 
@@ -39,11 +40,15 @@ export class ErrorBoundary extends Component<Props, State> {
 
       return (
         <View style={styles.container} testID="error-boundary-screen">
-          <Text style={styles.title}>Something went wrong</Text>
+          <Text style={styles.title}>{i18n.t('common.errorGeneric')}</Text>
           <Text style={styles.message}>
-            {this.state.error?.message ?? 'An unexpected error occurred.'}
+            {this.state.error?.message ?? i18n.t('common.errorGeneric')}
           </Text>
-          <Button title="Try Again" onPress={this.handleReset} testID="error-retry-btn" />
+          <Button
+            title={i18n.t('common.retry')}
+            onPress={this.handleReset}
+            testID="error-retry-btn"
+          />
         </View>
       );
     }

@@ -18,10 +18,12 @@ export const RateLimitCountdown: React.FC<RateLimitCountdownProps> = ({
   const { t } = useTranslation();
   const { theme } = useAppTheme();
   const [remaining, setRemaining] = useState<number>(initialSeconds);
+  const [prevInitial, setPrevInitial] = useState<number>(initialSeconds);
 
-  useEffect(() => {
+  if (initialSeconds !== prevInitial) {
+    setPrevInitial(initialSeconds);
     setRemaining(initialSeconds);
-  }, [initialSeconds]);
+  }
 
   useEffect(() => {
     if (remaining <= 0) return;
@@ -34,7 +36,10 @@ export const RateLimitCountdown: React.FC<RateLimitCountdownProps> = ({
   const canRetry = remaining === 0;
 
   return (
-    <View style={[styles.container, { backgroundColor: theme.colors.surfaceSecondary }]} testID={testID}>
+    <View
+      style={[styles.container, { backgroundColor: theme.colors.surfaceSecondary }]}
+      testID={testID}
+    >
       <Hourglass size={24} color={theme.colors.warning} />
       <Text style={[styles.message, { color: theme.colors.textPrimary }]}>
         {t('common.errorRateLimit', { seconds: remaining })}

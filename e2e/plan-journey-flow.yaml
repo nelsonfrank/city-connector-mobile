@@ -2,13 +2,13 @@ appId: com.cityconnector.app
 ---
 # Flow 2: Multi-agency Pareto journey planning
 - launchApp
-- tapOn: "Plan"
-- assertVisible: "Find Itineraries"
-- tapOn: "Find Itineraries"
-- assertVisible: "Fastest"
-- assertVisible: "Fewest Transfers"
-- assertVisible: "Least Walking"
-- tapOn: "Fewest Transfers"
+- tapOn: 'Plan'
+- assertVisible: 'Find Itineraries'
+- tapOn: 'Find Itineraries'
+- assertVisible: 'Fastest'
+- assertVisible: 'Fewest Transfers'
+- assertVisible: 'Least Walking'
+- tapOn: 'Fewest Transfers'
 - tapOn:
-    id: "journey-option-itin_transfers_2"
-- assertVisible: "Journey Itinerary"
+    id: 'journey-option-itin_transfers_2'
+- assertVisible: 'Journey Itinerary'

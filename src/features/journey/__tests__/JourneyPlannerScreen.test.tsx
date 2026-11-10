@@ -13,20 +13,18 @@ afterEach(() => {
 });
 afterAll(() => server.close());
 
-function renderWithProviders(ui: React.ReactElement) {
+async function renderWithProviders(ui: React.ReactElement) {
   const queryClient = new QueryClient({
     defaultOptions: {
       queries: { retry: false },
     },
   });
-  return render(
-    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
-  );
+  return await render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>);
 }
 
 describe('JourneyPlannerScreen Integration', () => {
   it('renders Pareto-optimal journey options on search', async () => {
-    renderWithProviders(<JourneyPlannerScreen />);
+    await renderWithProviders(<JourneyPlannerScreen />);
 
     const searchBtn = screen.getByTestId('journey-search-button');
     fireEvent.press(searchBtn);
@@ -45,7 +43,7 @@ describe('JourneyPlannerScreen Integration', () => {
   it('displays countdown and disables retry when a 429 occurs', async () => {
     setSimulateRateLimit(true);
 
-    renderWithProviders(<JourneyPlannerScreen />);
+    await renderWithProviders(<JourneyPlannerScreen />);
 
     const searchBtn = screen.getByTestId('journey-search-button');
     fireEvent.press(searchBtn);

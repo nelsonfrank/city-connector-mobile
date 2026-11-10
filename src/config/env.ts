@@ -1,10 +1,7 @@
 import { z } from 'zod';
 
 const envSchema = z.object({
-  EXPO_PUBLIC_API_BASE_URL: z
-    .string()
-    .url()
-    .default('https://api.cityconnector.transit'),
+  EXPO_PUBLIC_API_BASE_URL: z.string().url().default('https://api.cityconnector.transit'),
   EXPO_PUBLIC_USE_MOCKS: z
     .enum(['true', 'false'])
     .default('true')

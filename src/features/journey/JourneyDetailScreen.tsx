@@ -31,7 +31,12 @@ export const JourneyDetailScreen: React.FC<JourneyDetailScreenProps> = ({ journe
         />
       </View>
 
-      <View style={[styles.header, { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder }]}>
+      <View
+        style={[
+          styles.header,
+          { backgroundColor: theme.colors.surface, borderColor: theme.colors.surfaceBorder },
+        ]}
+      >
         <Text style={[styles.title, { color: theme.colors.textPrimary }]}>
           {t('journey.legTimeline')}
         </Text>

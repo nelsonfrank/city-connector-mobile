@@ -42,7 +42,11 @@ const StopListItemComponent: React.FC<StopListItemProps> = ({ stop, onPress }) =
             {stop.name}
           </Text>
           {stop.wheelchairAccessible && (
-            <Accessibility size={14} color={theme.colors.primary} accessibilityLabel="Wheelchair accessible" />
+            <Accessibility
+              size={14}
+              color={theme.colors.primary}
+              accessibilityLabel="Wheelchair accessible"
+            />
           )}
         </View>
 

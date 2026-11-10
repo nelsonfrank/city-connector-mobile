@@ -72,6 +72,9 @@
     "themeLight": "Light",
     "themeDark": "Dark",
     "refreshInterval": "Realtime Refresh Rate",
+    "languageEn": "English",
+    "languageSw": "Kiswahili",
+    "secondsUnit": "{{seconds}}s",
     "clearCache": "Clear Offline Cache",
     "cacheCleared": "Offline cache cleared successfully.",
     "version": "App Version: {{version}}"

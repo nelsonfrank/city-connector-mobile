@@ -66,6 +66,10 @@ export function formatDelay(delaySeconds: number | null | undefined): {
     return { text: 'Scheduled', isEarly: false, isDelayed: false, isOnTime: false };
   }
 
+  if (Math.abs(delaySeconds) < 60) {
+    return { text: 'On time', isEarly: false, isDelayed: false, isOnTime: true };
+  }
+
   const minutes = Math.round(delaySeconds / 60);
 
   if (minutes > 0) {
@@ -104,7 +108,8 @@ export function isRealtimeStale(
  */
 export function minutesUntil(targetIsoOrDate: string | Date, now: Date = new Date()): number {
   try {
-    const target = typeof targetIsoOrDate === 'string' ? parseISO(targetIsoOrDate) : targetIsoOrDate;
+    const target =
+      typeof targetIsoOrDate === 'string' ? parseISO(targetIsoOrDate) : targetIsoOrDate;
     return Math.max(0, differenceInMinutes(target, now));
   } catch {
     return 0;
